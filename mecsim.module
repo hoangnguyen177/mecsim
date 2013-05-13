@@ -1,0 +1,168 @@
+<?php
+
+/**
+ * @file
+ * mecsim module.
+ */
+
+/**
+ * @defgroup mecsim: Form API
+ * @ingroup mecsim
+ * @{
+ * Mecsim using the Drupal Form API.
+ *
+ * @author Hoang Anh Nguyen
+ */
+
+/**
+ * Implements hook_menu().
+ *
+ * Here we set up the URLs (menu entries) for the
+ * form examples. Note that most of the menu items
+ * have page callbacks and page arguments set, with
+ * page arguments set to be functions in external files.
+ */
+function mecsim_menu() {
+  $items = array();
+  $items['mecsim'] = array(
+    'title' => 'MECSIM Experiments',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mecsim_experiments_form'),
+    'access callback' => TRUE,
+    'description' => 'MECSIM Experiments Settings.',
+    'file' => 'mecsim_experiments_form.inc',
+  );
+
+
+  // experiment setting
+  $items['mecsim/experiment'] = array(
+    'title' => 'Experiment',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('experiment_general_form'),
+    'access callback' => TRUE,
+    'description' => 'One experiment',
+    'file' => 'experiment_form.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['mecsim/experiment/general'] = array(
+    'title' => 'Overview',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('experiment_general_form'),
+    'access callback' => TRUE,
+    'description' => 'Experiment Overview',
+    'file' => 'experiment_form.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => '-11', 
+  );
+
+  //experiment settings tab
+  $items['mecsim/experiment/experiment'] = array(
+    'title' => 'Experiment',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('experiment_setting_form'),
+    'access callback' => TRUE,
+    'description' => 'Experiment Parameters',
+    'file' => 'experiment_form.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => '-10',
+  );  
+
+  //simulation setting tab
+  $items['mecsim/experiment/simulation'] = array(
+    'title' => 'Simulation',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('simulation_setting_form'),
+    'access callback' => TRUE,
+    'description' => 'Simulation Parameters',
+    'file' => 'experiment_form.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => '-9',
+  );
+
+  //post-processing tab
+  $items['mecsim/experiment/processing'] = array(
+    'title' => 'Post-processing',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('processing_setting_form'),
+    'access callback' => TRUE,
+    'description' => 'Post-processing Options',
+    'file' => 'experiment_form.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => '-8',  
+  );
+
+  //optimization tab
+  $items['mecsim/experiment/optimization'] = array(
+    'title' => 'Optimization',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('optimization_setting_form'),
+    'access callback' => TRUE,
+    'description' => 'Optimization Options',
+    'file' => 'experiment_form.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => '-7',  
+  );
+
+  //ile management
+  $items['mecsim/experiment/file'] = array(
+    'title' => 'Files',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('file_management_setting_form'),
+    'access callback' => TRUE,
+    'description' => 'File Management Options',
+    'file' => 'experiment_form.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => '-6',  
+  );
+
+
+  //resource management
+  $items['mecsim/experiment/resource'] = array(
+    'title' => 'Resources',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('resource_management_setting_form'),
+    'access callback' => TRUE,
+    'description' => 'Experiment Resources',
+    'file' => 'experiment_form.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => '-5',  
+  );
+
+  //new experiment 
+    $items['newexperiment'] = array(
+    'title' => 'New MecSIM Experiment',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('new_experiment_form'),
+    'access callback' => TRUE,
+    'description' => 'New Experiment',
+    'file' => 'new_experiment_form.inc',
+  );
+
+
+  return $items;
+
+}
+
+/**
+* Implement the hook theme
+*/
+function mecsim_theme() {
+  return array(
+    // Theme function for the experiments.
+    'mecsim_experiments_form' => array(
+      'render element' => 'form',
+      'file' => 'mecsim_experiments_form.inc',
+    ),
+  );
+}
+
+
+  /**
+ * Page callback for our general info page.
+ */
+function mecsim_intro() {
+  $markup = t('This module provides means to run Nimrod experiment, esp for MecSim app');
+  return array('#markup' => $markup);
+}
+

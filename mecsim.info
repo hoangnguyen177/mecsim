@@ -1,0 +1,11 @@
+name = MecSim module
+description = For mecsim experiments.
+package = Nimrod Application modules
+core = 7.x
+
+; Information added by drupal.org packaging script on 2013-04-10
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "mecsim"
+datestamp = "1365037010"
+
